@@ -11,16 +11,17 @@ void inc(ckt * c) {
 }
 
 void ingate(gate * g, int x, int y, short type) {
+	g->type = type;
 	int x1, x2, x3, y1, y2, y3;
 	if(type == NOT) {
 		ininput(&(g->i1), x1, y1);
 		g->i2.ip = -1;
-		inoutput(&(g->o), x2, y2);
+		inoutput(&(g->o), x2, y2, type);
 	}
 	else {
 		ininput(&(g->i1), x1, y1);
 		ininput(&(g->i2), x2, y2);
-		inouput(&(g->o), x3, y3);
+		inoutput(&(g->o), x3, y3, type);
 	}
 } 
 
@@ -39,9 +40,10 @@ void ininput(input * i, int x, int y) {
 	cnt++;
 }
 
-void inoutput(output * o, int x, int y) {
+void inoutput(output * o, int x, int y, short type) {
 	o->op = -1;
 	o->w = NULL;
+	o->type = type;
 	if(cnt == 0) {
 		junction = (pos *)malloc(sizeof(pos));
 	}
@@ -110,7 +112,7 @@ void inwire(wire * w, int x1, int y1, int x2, int y2) {
 }
 
 
-void insch(sch * s, int x, int y, short state) {
+void inswitch(sch * s, int x, int y, short state) {
 	int x1, y1;
 	/*x1 and y1 is actual connecting point */
 

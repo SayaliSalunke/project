@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "ncurse.h"
+#include <ncurses.h>
+#include "screen.h"
+
 
 action * get_action() {
 	action * a = (action *)malloc(sizeof(action));
@@ -11,4 +13,13 @@ action * get_action() {
 
 void initial_window() {
 	//all screen loading 
+	initscr();
+	printw(" Toolbox ");
+	refresh();
+	getch();
+	endwin();
+}
+
+void changeLED(led * l, short type ) {
+
 }

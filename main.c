@@ -2,9 +2,10 @@
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
-#include "logic.h"
+#include <ncurses.h>
 #include "screen.h"
 #include "out.h"
+#include "stack.h"
 
 int main() {
 	pos *posptr;
@@ -58,8 +59,8 @@ int main() {
 						}
 						else
 							c.sarray = (sch *)realloc(c.sarray, sizeof(sch) * (c.si + 1));
-						c.sarray[c.si]->index = c.si;
-						insch((c.sarray + c.si), x2, y2, x3);// in case of switch x3 is state 
+						c.sarray[c.si].index = c.si;
+						inswitch((c.sarray + c.si), x2, y2, x3);// in case of switch x3 is state 
 						c.si++;
 						break;
 
@@ -88,7 +89,7 @@ int main() {
 			and print the boolean equation 
 			and print the truthtable*/
 			glowled(&c);/* Here i will have a fuction that will change the look of the led */
-			print(&c);
+			//print(&c);
 		}
 		a = get_action();
 	}
